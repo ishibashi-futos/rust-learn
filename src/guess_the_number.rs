@@ -19,6 +19,9 @@ pub fn guess_the_number() {
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
+                if guess.trim() == "quit" {
+                    break;
+                }
                 eprintln!("Please enter your guess as a number [1-10].");
                 continue;
             }
