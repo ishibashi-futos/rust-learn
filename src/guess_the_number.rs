@@ -9,7 +9,7 @@ pub fn guess_the_number() {
 
         // println!("The secret number is: {}", secret_number);
 
-        println!("Please input your guess.");
+        println!("Please input your guess. (Type \"quit\" to break)");
 
         let mut guess = String::new();
 
