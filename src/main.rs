@@ -5,6 +5,7 @@ mod functions;
 mod flow_control;
 mod ownership;
 mod references_and_borrowing;
+mod slices;
 
 fn main() {
     println!("Hello, world!");
@@ -15,5 +16,6 @@ fn main() {
     flow_control::flow_control();
     ownership::ownership();
     references_and_borrowing::references_and_borrowing();
+    slices::slices();
     println!("Good bye!");
 }
