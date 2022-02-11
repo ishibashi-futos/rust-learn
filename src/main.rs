@@ -3,6 +3,7 @@ mod mutate;
 mod data_types;
 mod functions;
 mod flow_control;
+mod ownership;
 
 fn main() {
     println!("Hello, world!");
@@ -11,5 +12,6 @@ fn main() {
     data_types::data_types();
     functions::all();
     flow_control::flow_control();
+    ownership::ownership();
     println!("Good bye!");
 }
