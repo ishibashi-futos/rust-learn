@@ -1,5 +1,3 @@
-use crate::example_struct::example_struct;
-
 mod guess_the_number;
 mod mutate;
 mod data_types;
