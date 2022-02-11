@@ -6,6 +6,7 @@ mod flow_control;
 mod ownership;
 mod references_and_borrowing;
 mod slices;
+mod use_struct;
 
 fn main() {
     println!("Hello, world!");
@@ -17,5 +18,6 @@ fn main() {
     ownership::ownership();
     references_and_borrowing::references_and_borrowing();
     slices::slices();
+    use_struct::use_struct();
     println!("Good bye!");
 }
