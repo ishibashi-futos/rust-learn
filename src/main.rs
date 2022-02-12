@@ -12,9 +12,10 @@ mod defining_enum;
 mod match_flow_control;
 mod defining_modules;
 mod using_defined_modules;
+mod logger;
 
 fn main() {
-    println!("Hello, world!");
+    logger::info(&format!("Hello, {}!", "world"));
     guess_the_number::guess_the_number();
     mutate::mutate();
     data_types::data_types();
@@ -29,5 +30,5 @@ fn main() {
     match_flow_control::match_flow_control();
     defining_modules::defining_modules();
     using_defined_modules::using_defined_modules();
-    println!("Good bye!");
+    logger::info("Good bye!");
 }
