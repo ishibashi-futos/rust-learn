@@ -46,7 +46,9 @@ enum Message {
 
 #[derive(Debug)]
 struct MoveMessage {
+    #[allow(dead_code)]
     x: i32,
+    #[allow(dead_code)]
     y: i32,
 }
 
