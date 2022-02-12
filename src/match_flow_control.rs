@@ -20,6 +20,20 @@ pub fn match_flow_control() {
     let none = plus_one(none);
     write(&none);
     // plus_one(Some(255));
+
+    let some_u8_value = Some(0u8);
+    match some_u8_value {
+        Some(x) => println!("some value x is: {}", x),
+        _ => (),
+    }
+
+    if let Some(x) = some_u8_value {
+        println!("some value x is: {}", x);
+    }
+    let some_u8_value: Option<u8> = None;
+    if let None = some_u8_value {
+        println!("some value x is none");
+    }
 }
 
 enum Coin {
