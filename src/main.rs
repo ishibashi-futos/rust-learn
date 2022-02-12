@@ -8,6 +8,8 @@ mod references_and_borrowing;
 mod slices;
 mod use_struct;
 mod example_struct;
+mod defining_enum;
+mod match_flow_control;
 
 fn main() {
     println!("Hello, world!");
@@ -21,5 +23,7 @@ fn main() {
     slices::slices();
     use_struct::use_struct();
     example_struct::example_struct();
+    defining_enum::defining_enum();
+    match_flow_control::match_flow_control();
     println!("Good bye!");
 }
