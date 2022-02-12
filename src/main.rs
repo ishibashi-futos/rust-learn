@@ -10,6 +10,8 @@ mod use_struct;
 mod example_struct;
 mod defining_enum;
 mod match_flow_control;
+mod defining_modules;
+mod using_defined_modules;
 
 fn main() {
     println!("Hello, world!");
@@ -25,5 +27,7 @@ fn main() {
     example_struct::example_struct();
     defining_enum::defining_enum();
     match_flow_control::match_flow_control();
+    defining_modules::defining_modules();
+    using_defined_modules::using_defined_modules();
     println!("Good bye!");
 }
