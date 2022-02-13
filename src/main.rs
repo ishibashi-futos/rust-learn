@@ -13,6 +13,7 @@ mod match_flow_control;
 mod defining_modules;
 mod using_defined_modules;
 mod logger;
+mod example_collections;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -30,5 +31,6 @@ fn main() {
     match_flow_control::match_flow_control();
     defining_modules::defining_modules();
     using_defined_modules::using_defined_modules();
+    example_collections::example_collections();
     logger::info("Good bye!");
 }
