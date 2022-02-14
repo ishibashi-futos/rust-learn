@@ -4,7 +4,7 @@ pub fn strings() {
     let mut s = String::new();
     s.push_str("hello");
 
-    let mut s = "initial contents";
+    // let mut s = "initial contents";
     // s.push_str(", world"); // String は、文字列を追加できない
 
     logger::info(&format!("s: {}", s));
