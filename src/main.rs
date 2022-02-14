@@ -14,6 +14,7 @@ mod defining_modules;
 mod using_defined_modules;
 mod logger;
 mod example_collections;
+mod strings;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -32,5 +33,6 @@ fn main() {
     defining_modules::defining_modules();
     using_defined_modules::using_defined_modules();
     example_collections::example_collections();
+    strings::strings();
     logger::info("Good bye!");
 }
