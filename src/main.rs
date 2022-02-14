@@ -15,6 +15,7 @@ mod using_defined_modules;
 mod logger;
 mod example_collections;
 mod strings;
+mod hash_maps;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -34,5 +35,6 @@ fn main() {
     using_defined_modules::using_defined_modules();
     example_collections::example_collections();
     strings::strings();
+    hash_maps::hash_maps();
     logger::info("Good bye!");
 }
