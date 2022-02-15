@@ -16,6 +16,8 @@ mod logger;
 mod example_collections;
 mod strings;
 mod hash_maps;
+mod errors_with_panic;
+mod errors_with_result;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -36,5 +38,7 @@ fn main() {
     example_collections::example_collections();
     strings::strings();
     hash_maps::hash_maps();
+    errors_with_panic::errors_with_panic();
+    errors_with_result::errors_with_result();
     logger::info("Good bye!");
 }
