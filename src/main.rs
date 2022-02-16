@@ -19,6 +19,7 @@ mod hash_maps;
 mod errors_with_panic;
 mod errors_with_result;
 mod panic_or_not_panic;
+mod generics_example;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -42,5 +43,6 @@ fn main() {
     errors_with_panic::errors_with_panic();
     errors_with_result::errors_with_result();
     panic_or_not_panic::panic_or_not_panic();
+    generics_example::generics_example();
     logger::info("Good bye!");
 }
