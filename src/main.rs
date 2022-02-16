@@ -18,6 +18,7 @@ mod strings;
 mod hash_maps;
 mod errors_with_panic;
 mod errors_with_result;
+mod panic_or_not_panic;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -40,5 +41,6 @@ fn main() {
     hash_maps::hash_maps();
     errors_with_panic::errors_with_panic();
     errors_with_result::errors_with_result();
+    panic_or_not_panic::panic_or_not_panic();
     logger::info("Good bye!");
 }
