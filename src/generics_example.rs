@@ -225,7 +225,7 @@ impl<T: Display + PartialOrd> Pair<T> {
     }
 }
 
-// Displayトレイトが実装されている任意の方であれば、
+// Displayトレイトが実装されている任意の型であれば、
 // 表示に使うことができることがわかるのでformat!マクロで使用できる
 impl<T: Display> ToString for Pair<T> {
     fn to_string(&self) -> String {
