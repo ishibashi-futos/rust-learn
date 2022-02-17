@@ -20,6 +20,7 @@ mod errors_with_panic;
 mod errors_with_result;
 mod panic_or_not_panic;
 mod generics_example;
+mod lifetime_syntax;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -44,5 +45,6 @@ fn main() {
     errors_with_result::errors_with_result();
     panic_or_not_panic::panic_or_not_panic();
     generics_example::generics_example();
+    lifetime_syntax::lifetime_syntax();
     logger::info("Good bye!");
 }
