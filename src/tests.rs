@@ -1,7 +1,8 @@
 #[allow(dead_code)]
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::*; // おなじmod内から呼び出すことができる
+    use tests_learn::*; // modに名前をつけた場合はこちらを使う
 
     #[test]
     fn exploration() {
@@ -10,8 +11,8 @@ mod tests {
 
     #[test]
     fn larger_can_hold_smaller() {
-        let larger = Rectangle { width: 8, height: 7 };
-        let smaller = Rectangle { width: 7, height: 6 };
+        let larger = tests_learn::Rectangle { width: 8, height: 7 };
+        let smaller = tests_learn::Rectangle { width: 7, height: 6 };
 
         let actual = larger.can_hold(&smaller);
 
@@ -87,7 +88,7 @@ mod tests {
 }
 
 #[allow(dead_code)]
-fn it_work(i: u32) -> Result<u32, String> {
+pub fn it_work(i: u32) -> Result<u32, String> {
     if i + 2 == 4 {
         Ok(i+2)
     } else {
@@ -95,40 +96,43 @@ fn it_work(i: u32) -> Result<u32, String> {
     }
 }
 
-#[allow(dead_code)]
-#[derive(Debug)]
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-#[allow(dead_code)]
-impl Rectangle {
-    fn can_hold(&self, other: &Rectangle) -> bool {
-        self.width > other.width && self.height > other.height
+pub mod tests_learn {
+    #[allow(dead_code)]
+    #[derive(Debug)]
+    pub struct Rectangle {
+        pub width: u32,
+        pub height: u32,
     }
-}
 
-#[allow(dead_code)]
-fn add_two(a: i32) -> i32 {
-    a + 2
-}
-
-#[allow(dead_code)]
-fn greeting(name: &str) -> String {
-    format!("Hello, {}", name)
-}
-
-struct Guess {
-    value: u8,
-}
-
-impl Guess {
-    fn new(value: u8) -> Guess {
-        if value < 1 || value > 100 {
-            panic!("Guess value must be between 1 and 100, got {}.", value);
+    #[allow(dead_code)]
+    impl Rectangle {
+        pub fn can_hold(&self, other: &Rectangle) -> bool {
+            self.width > other.width && self.height > other.height
         }
+    }
 
-        Guess { value }
+    #[allow(dead_code)]
+    pub fn add_two(a: i32) -> i32 {
+        a + 2
+    }
+
+    #[allow(dead_code)]
+    pub fn greeting(name: &str) -> String {
+        format!("Hello, {}", name)
+    }
+
+    #[allow(dead_code)]
+    pub struct Guess {
+        value: u8,
+    }
+
+    impl Guess {
+        pub fn new(value: u8) -> Guess {
+            if value < 1 || value > 100 {
+                panic!("Guess value must be between 1 and 100, got {}.", value);
+            }
+
+            Guess { value }
+        }
     }
 }
