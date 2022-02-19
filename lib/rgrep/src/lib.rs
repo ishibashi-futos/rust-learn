@@ -1,24 +1,24 @@
+use std::error::Error;
 use std::io::prelude::*;
 use std::result;
 use std::{fs::File, io::Read};
-use std::error::Error;
 
 pub struct Config {
-  pub query: String,
-  pub filename: String,
+    pub query: String,
+    pub filename: String,
 }
 
 impl Config {
-  pub fn new(args: &[String]) -> Result<Config, &'static str> {
-      if args.len() < 3 {
-          return Err("not enough arguments");
-      }
+    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+        if args.len() < 3 {
+            return Err("not enough arguments");
+        }
 
-      let query = args[1].clone();
-      let filename = args[2].clone();
+        let query = args[1].clone();
+        let filename = args[2].clone();
 
-      Ok(Config { query, filename })
-  }
+        Ok(Config { query, filename })
+    }
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {

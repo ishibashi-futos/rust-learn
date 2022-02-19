@@ -1,7 +1,7 @@
 extern crate rgrep;
 
-use std::process;
 use std::env;
+use std::process;
 
 use rgrep::Config;
 

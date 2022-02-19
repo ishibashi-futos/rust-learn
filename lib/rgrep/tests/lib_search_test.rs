@@ -29,12 +29,8 @@ Pick three.";
     let actual = search(query, contents).len();
 
     assert_eq!(2, actual);
-    assert_eq!(
-        vec!["Rust:", "Rust is awesome."],
-        search(query, contents)
-    );
+    assert_eq!(vec!["Rust:", "Rust is awesome."], search(query, contents));
 }
-
 
 #[test]
 fn search_not_found_query_text() {
