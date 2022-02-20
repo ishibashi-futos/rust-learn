@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::fmt::Display;
+use std::hash::Hash;
 use std::thread;
 use std::time::Duration;
 
@@ -11,10 +11,7 @@ pub fn closures() {
     let simulated_user_specified_value = 10;
     let simulated_random_number = 7;
 
-    generate_workout(
-        simulated_user_specified_value,
-        simulated_random_number
-    );
+    generate_workout(simulated_user_specified_value, simulated_random_number);
 
     // クロージャにおいては、型注釈は必須ではない
     let expensive_closure = |num| {
@@ -30,11 +27,13 @@ pub fn closures() {
     logger::info(&format!("[closure]num: {}", num));
 
     // 以下の関数は概ね等価である(使われ方によって型が決まる)
-    fn add_one_v1 (x: i32) -> i32 { x + 1 }
+    fn add_one_v1(x: i32) -> i32 {
+        x + 1
+    }
     logger::info(&format!("add_one_v1: {}", add_one_v1(1)));
     let add_one_v2 = |x: i32| -> i32 { x + 1 };
     logger::info(&format!("add_one_v2: {}", add_one_v2(1)));
-    let add_one_v3 = |x| { x + 1 };
+    let add_one_v3 = |x| x + 1;
     logger::info(&format!("add_one_v1: {}", add_one_v3(1)));
     let add_one_v4 = |x| x + 1;
     logger::info(&format!("add_one_v1: {}", add_one_v4(1)));
@@ -84,42 +83,38 @@ fn generate_workout(intensity: u32, random_number: u32) {
     });
 
     if intensity < 25 {
-        logger::info(
-            &format!(
-                "Today, do {} pushups!",
-                expensive_result.value(intensity)
-            )
-        );
+        logger::info(&format!(
+            "Today, do {} pushups!",
+            expensive_result.value(intensity)
+        ));
 
-        logger::info(
-            &format!(
-                "Next, do {} situps!",
-                expensive_result.value(intensity)
-            )
-        );
+        logger::info(&format!(
+            "Next, do {} situps!",
+            expensive_result.value(intensity)
+        ));
     } else {
         if random_number == 3 {
             logger::info("Taks a break today! Remember to stay hydrated!");
         } else {
-            logger::info(
-                &format!(
-                    "Today, run for {} minutes!",
-                    expensive_result.value(intensity)
-                )
-            );
+            logger::info(&format!(
+                "Today, run for {} minutes!",
+                expensive_result.value(intensity)
+            ));
         }
     }
 }
 
 struct Cacher<T>
-    where T: Fn(u32) -> u32
+where
+    T: Fn(u32) -> u32,
 {
     calculation: T,
     value: Option<u32>,
 }
 
 impl<T> Cacher<T>
-    where T: Fn(u32) -> u32
+where
+    T: Fn(u32) -> u32,
 {
     fn new(calculation: T) -> Cacher<T> {
         Cacher {
@@ -133,7 +128,7 @@ impl<T> Cacher<T>
             Some(v) => {
                 logger::info(&format!("[closure]cached value: {}", v));
                 v
-            },
+            }
             None => {
                 logger::info("[closure]value not found");
                 let v = (self.calculation)(arg);
@@ -142,29 +137,31 @@ impl<T> Cacher<T>
             }
         }
     }
-
 }
 
-pub struct MappedCache<T >
-    where T: FnMut(u32) -> u32
+pub struct MappedCache<T, R>
+where
+    T: Fn(R) -> R,
 {
     calculation: T,
-    values: HashMap<u32, u32>
+    values: HashMap<R, R>,
 }
 
-impl<T> MappedCache<T>
-    where T: Fn(u32) -> u32
+impl<T, R: Eq + Hash + Copy> MappedCache<T, R>
+where
+    T: Fn(R) -> R,
 {
-    pub fn new(calculation: T) -> MappedCache<T> {
+    #[allow(dead_code)]
+    pub fn new(calculation: T) -> MappedCache<T, R> {
         MappedCache {
             calculation,
             values: HashMap::new(),
         }
     }
 
-    pub fn value(&mut self, arg: u32) -> u32 {
-        let v= self.values.entry(arg).or_insert((self.calculation)(arg));
+    #[allow(dead_code)]
+    pub fn value(&mut self, arg: R) -> R {
+        let v = self.values.entry(arg).or_insert((self.calculation)(arg));
         *v
     }
-
 }

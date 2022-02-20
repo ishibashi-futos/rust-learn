@@ -24,3 +24,28 @@ fn value_cached_two_value_found() {
 
     assert_eq!(v1, 16);
 }
+
+#[test]
+fn value_string_slice_cache_found() {
+    let mut cache = MappedCache::new(|v: &str| {
+        v
+    });
+
+    cache.value("hello");
+    let cached = cache.value("hello");
+
+    assert_eq!(cached, "hello");
+}
+
+#[test]
+fn value_string_slice_has_two_values_cache_found() {
+    let mut cache = MappedCache::new(|v: &str| {
+        v
+    });
+
+    cache.value("hello");
+    cache.value("world");
+    let cached = cache.value("hello");
+
+    assert_eq!(cached, "hello");
+}
