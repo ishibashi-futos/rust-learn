@@ -164,4 +164,10 @@ where
         let v = self.values.entry(arg).or_insert((self.calculation)(arg));
         *v
     }
+
+    #[allow(dead_code)]
+    pub fn value_or_default<F: Fn(R) -> R>(&mut self, arg: R, generator: F) -> R {
+        let v = self.values.entry(arg).or_insert(generator(arg));
+        *v
+    }
 }

@@ -41,3 +41,38 @@ fn value_string_slice_has_two_values_cache_found() {
 
     assert_eq!(cached, "hello");
 }
+
+#[test]
+fn value_is_none_generate_default_value() {
+    let mut cache = MappedCache::new(|v: &str| v);
+
+    let cached =
+        cache.value_or_default("hello", |arg| if arg.len() > 10 { "yay!" } else { "nay!" });
+
+    assert_eq!(cached, "nay!");
+}
+
+#[test]
+fn value_is_found_value_hello() {
+    let mut cache = MappedCache::new(|v: &str| v);
+
+    cache.value("hello");
+    let cached = cache.value_or_default("hello", |_| "world");
+
+    assert_eq!(cached, "hello");
+}
+
+#[derive(Debug, Hash, Eq, PartialEq)]
+struct TestValue {
+    item: u32,
+}
+
+#[test]
+fn test_generator_func() {
+    let mut cache = MappedCache::new(|v: &TestValue| v);
+
+    cache.value(&TestValue { item: 1 });
+    let cached = cache.value_or_default(&TestValue { item: 2 }, |_| &TestValue { item: 0 });
+
+    assert_eq!(cached.item, 0);
+}
