@@ -22,6 +22,7 @@ mod slices;
 mod strings;
 mod use_struct;
 mod using_defined_modules;
+mod iterators;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
@@ -48,5 +49,6 @@ fn main() {
     generics_example::generics_example();
     lifetime_syntax::lifetime_syntax();
     closures::closures();
+    iterators::iterators();
     logger::info("Good bye!");
 }
