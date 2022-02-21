@@ -1,7 +1,6 @@
 use std::error::Error;
 #[allow(unused_imports)]
 use std::io::prelude::*;
-use std::ops::RangeBounds;
 #[allow(unused_imports)]
 use std::{env, result};
 use std::{fs::File, io::Read};
@@ -69,7 +68,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<Found> {
     contents
         .lines()
         .enumerate()
-        .map(|i| Found::new(i.0, i.1.to_string()))
+        .map(|i| Found::new(i.0 + 1, i.1.to_string()))
         .filter(|f| f.line.contains(query))
         .collect()
 }
@@ -80,7 +79,7 @@ pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<Found>
     contents
         .lines()
         .enumerate()
-        .map(|i| Found::new(i.0, i.1.to_string()))
+        .map(|i| Found::new(i.0 + 1, i.1.to_string()))
         .filter(|f| f.line.to_lowercase().contains(&query))
         .collect()
 }
