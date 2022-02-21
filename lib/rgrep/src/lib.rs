@@ -10,13 +10,18 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
+    pub fn new(mut args: std::slice::Iter<std::string::String>) -> Result<Config, &str> {
 
-        let query = args[1].clone();
-        let filename = args[2].clone();
+        // 1つめの文字列はプログラム名なので無視
+        args.next();
+        let query = match args.next() {
+            Some(arg) => arg.to_string(),
+            None => return Err("Didn't get a query string"),
+        };
+        let filename = match args.next() {
+            Some(arg) => arg.to_string(),
+            None => return Err("Didn't get a filename string"),
+        };
 
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
 
