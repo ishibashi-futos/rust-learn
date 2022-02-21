@@ -11,6 +11,7 @@ mod functions;
 mod generics_example;
 mod guess_the_number;
 mod hash_maps;
+mod iterators;
 mod lifetime_syntax;
 mod logger;
 mod match_flow_control;
@@ -22,7 +23,6 @@ mod slices;
 mod strings;
 mod use_struct;
 mod using_defined_modules;
-mod iterators;
 
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
