@@ -6,6 +6,6 @@ fn internal_adder(a: i32, b: i32) -> i32 {
     a + b
 }
 
-pub mod tests;
 pub mod closures;
 pub mod logger;
+pub mod tests;

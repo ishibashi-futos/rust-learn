@@ -1,7 +1,6 @@
 use crate::logger;
 
 pub fn errors_with_panic() {
-
     logger::info("errors_with_panic begin");
 
     // panic!("crash and burn"); // クラッシュして炎上する

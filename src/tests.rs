@@ -11,8 +11,14 @@ mod tests {
 
     #[test]
     fn larger_can_hold_smaller() {
-        let larger = tests_learn::Rectangle { width: 8, height: 7 };
-        let smaller = tests_learn::Rectangle { width: 7, height: 6 };
+        let larger = tests_learn::Rectangle {
+            width: 8,
+            height: 7,
+        };
+        let smaller = tests_learn::Rectangle {
+            width: 7,
+            height: 6,
+        };
 
         let actual = larger.can_hold(&smaller);
 
@@ -21,8 +27,14 @@ mod tests {
 
     #[test]
     fn smaller_cannot_hold_larger() {
-        let larger = Rectangle { width: 8, height: 7 };
-        let smaller = Rectangle { width: 7, height: 6 };
+        let larger = Rectangle {
+            width: 8,
+            height: 7,
+        };
+        let smaller = Rectangle {
+            width: 7,
+            height: 6,
+        };
 
         let actual = smaller.can_hold(&larger);
 
@@ -50,7 +62,8 @@ mod tests {
 
         assert!(
             result.contains("Carol"),
-            "Greeting did not contain name, value was `{}`", result
+            "Greeting did not contain name, value was `{}`",
+            result
         );
     }
 
@@ -90,7 +103,7 @@ mod tests {
 #[allow(dead_code)]
 pub fn it_work(i: u32) -> Result<u32, String> {
     if i + 2 == 4 {
-        Ok(i+2)
+        Ok(i + 2)
     } else {
         Err(String::from("two plus two does not equal four"))
     }

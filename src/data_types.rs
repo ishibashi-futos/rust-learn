@@ -35,7 +35,7 @@ pub fn data_types() {
     /* 文字型(Not String) */
     let _c = 'z';
     let _z = 'ℤ';
-    let _heart_eyed_cat = '😻';    //ハート目の猫
+    let _heart_eyed_cat = '😻'; //ハート目の猫
 
     // Tuple
     let _tuple: (i32, f64, u8) = (500, 6.4, 1);
@@ -48,8 +48,18 @@ pub fn data_types() {
     println!("tuple[2]={}", &_tuple.2); // 1
 
     let _months = [
-        "January", "February", "March", "April", "May", "June", "July",
-        "August", "September", "October", "November", "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
     ];
     println!("Month={}", &_months[0]); // January
     println!("Month={}", &_months[11]); // December

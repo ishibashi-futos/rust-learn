@@ -13,14 +13,13 @@ pub fn defining_enum() {
 
     let quit = Message::Quit;
     quit.call();
-    let mv = Message::Move(MoveMessage {x: 10, y: 10});
+    let mv = Message::Move(MoveMessage { x: 10, y: 10 });
     mv.call();
     let write = Message::Write(String::from("hello"));
     write.call();
     let change_color = Message::ChangeColor(255, 0, 255);
     change_color.call();
 }
-
 
 enum IpAddr {
     V4(u8, u8, u8, u8),

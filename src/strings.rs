@@ -35,7 +35,6 @@ pub fn strings() {
     logger::info(&format!("s: {}", s)); // Зд
     let s = &hello[0..2]; // 最初の2byteを取得
     logger::info(&format!("s: {}", s)); // З
-    // let s = &hello[0..1]; // 最初の1byteを取得しpanicする
-    // logger::info(&format!("s: {}", s)); // Зд
-
+                                        // let s = &hello[0..1]; // 最初の1byteを取得しpanicする
+                                        // logger::info(&format!("s: {}", s)); // Зд
 }

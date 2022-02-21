@@ -21,7 +21,6 @@ pub fn references_and_borrowing() {
     let r2 = &s1;
     println!("r1: {}, r2: {}", &r1, &r2);
 
-
     // スコープが異なる場合は参照を生成できる
     #[allow(unused_variables, unused_mut)]
     let mut s1 = String::from("Hello, World!");

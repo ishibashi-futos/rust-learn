@@ -27,7 +27,7 @@ pub fn use_struct() {
 
 struct User {
     username: String, // &strではなくStringを指定しているが、ライフタイム指定が必要なため
-    email: String, // &strではなくStringを指定しているが、ライフタイム指定が必要なため
+    email: String,    // &strではなくStringを指定しているが、ライフタイム指定が必要なため
     sign_in_count: u64,
     active: bool,
 }
@@ -43,7 +43,10 @@ fn new_user(email: String, username: String) -> User {
 }
 
 fn print_user(user: &User) {
-    println!("name: {}, email: {}, isActive: {}, sign_in_count: {}", user.username, user.email, user.active, user.sign_in_count);
+    println!(
+        "name: {}, email: {}, isActive: {}, sign_in_count: {}",
+        user.username, user.email, user.active, user.sign_in_count
+    );
 }
 
 // 同じフィールドを持つtuple構造体だが、異なる型として扱われる
@@ -51,9 +54,15 @@ struct Color(u8, u8, u8, f32);
 struct BorderColor(u8, u8, u8, f32);
 
 fn print_color(color: Color) {
-    println!("r: {}, g: {}, b: {}, a: {}", color.0, color.1, color.2, color.3);
+    println!(
+        "r: {}, g: {}, b: {}, a: {}",
+        color.0, color.1, color.2, color.3
+    );
 }
 
 fn print_border_color(color: BorderColor) {
-    println!("r: {}, g: {}, b: {}, a: {}", color.0, color.1, color.2, color.3);
+    println!(
+        "r: {}, g: {}, b: {}, a: {}",
+        color.0, color.1, color.2, color.3
+    );
 }

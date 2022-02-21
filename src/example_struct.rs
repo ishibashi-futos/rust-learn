@@ -17,9 +17,18 @@ pub fn example_struct() {
         rect.area()
     );
 
-    let rect1 = Rectangle { width: 30, height: 50 };
-    let rect2 = Rectangle { width: 10, height: 40 };
-    let rect3 = Rectangle { width: 60, height: 45 };
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
 
     println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
     println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
@@ -47,13 +56,15 @@ impl Rectangle {
     }
 
     fn print_area(&self) {
-        println!("The area of the rectangle is {} square pixels.", self.area());
+        println!(
+            "The area of the rectangle is {} square pixels.",
+            self.area()
+        );
     }
 
     fn can_hold(&self, other: &Rectangle) -> bool {
         self.width > other.width && self.height > other.height
     }
-
 }
 
 // implブロックは分割することができる
@@ -63,6 +74,9 @@ impl Rectangle {
     }
 
     fn square(size: u32) -> Rectangle {
-        Rectangle { width: size, height: size }
+        Rectangle {
+            width: size,
+            height: size,
+        }
     }
 }

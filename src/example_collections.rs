@@ -17,7 +17,7 @@ pub fn example_collections() {
     let mut v: Vec<String> = Vec::new();
     let mut one = String::from("1");
     v.push(one); // 所有権が移るので、ここでoneは破棄される
-    // logger::info(&format!("one: {}", one)); // コンパイルできない
+                 // logger::info(&format!("one: {}", one)); // コンパイルできない
     logger::info(&format!("v: {:?}", v));
     one = String::from("2");
     logger::info(&format!("one: {}", one)); // 所有権は移ってない？
@@ -36,7 +36,10 @@ pub fn example_collections() {
 
     // 以下の行はPanicを起こさない
     let does_not_exist = v.get(100);
-    logger::info(&format!("does_not_exist: {}", does_not_exist.unwrap_or(&255)));
+    logger::info(&format!(
+        "does_not_exist: {}",
+        does_not_exist.unwrap_or(&255)
+    ));
 
     // ベクタ要素を取り出して使用しようとしたとき、その間で要素を追加するとコンパイルできなくなる
     let mut v = vec![100, 32, 57];

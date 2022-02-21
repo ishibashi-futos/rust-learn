@@ -1,6 +1,6 @@
 pub fn mutate() {
     // let x = 5; // immutable
-    let mut x :i32 = 5; // mutable
+    let mut x: i32 = 5; // mutable
     println!("The value of x is: {}", x);
 
     x = 6;
@@ -11,8 +11,9 @@ pub fn mutate() {
 
     println!("Please enter message [max 10 characters]");
     let mut input = String::new();
-    std::io::stdin().read_line(&mut input)
-            .expect("Failed to read line");
+    std::io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
     let input = input.trim();
 
     if input.len() > MAX_LENGTH {

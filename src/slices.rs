@@ -2,14 +2,19 @@ pub fn slices() {
     let s = String::from("hello world");
     println!("word will get the value 5: actual:{}", first_word(&s));
 
-    println!("word will get the value 11: actual:{}", first_word(&String::from("hello_world")));
+    println!(
+        "word will get the value 11: actual:{}",
+        first_word(&String::from("hello_world"))
+    );
 
     let slice = &s[0..5];
     println!("slice: {}", slice);
 
     println!("expected: hello, actual: {}", mod_first_word(&s));
-    println!("expected: hello_world, actual: {}", mod_first_word(&String::from("hello_world")));
-
+    println!(
+        "expected: hello_world, actual: {}",
+        mod_first_word(&String::from("hello_world"))
+    );
 }
 
 fn first_word(s: &String) -> usize {

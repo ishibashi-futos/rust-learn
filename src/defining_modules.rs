@@ -80,12 +80,15 @@ mod back_of_house {
         pub fn summer(toast: &str) -> Breakfast {
             Breakfast {
                 toast: String::from(toast),
-                seasonal_fruit: String::from("peaches")
+                seasonal_fruit: String::from("peaches"),
             }
         }
 
         pub fn print(&self) {
-            println!("toast: {}, seasonal fruit: {}", self.toast, self.seasonal_fruit);
+            println!(
+                "toast: {}, seasonal fruit: {}",
+                self.toast, self.seasonal_fruit
+            );
         }
     }
 

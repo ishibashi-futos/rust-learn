@@ -1,8 +1,8 @@
+use crate::logger;
 use std::fs;
 use std::fs::File;
 use std::io;
-use std::io::{ErrorKind, Write, Read};
-use crate::logger;
+use std::io::{ErrorKind, Read, Write};
 
 pub fn errors_with_result() {
     logger::info("errors_with_result begin");
@@ -10,19 +10,18 @@ pub fn errors_with_result() {
     let f = File::open("hello.txt");
     let mut f = match f {
         Ok(file) => file,
-        Err(ref error) if error.kind() == ErrorKind::NotFound => {
-            match File::create("hello.txt") {
-                Ok(new_file) => new_file,
-                Err(e) => {
-                    panic!("Tried to create file but there was a problem: {:?}", e);
-                }
+        Err(ref error) if error.kind() == ErrorKind::NotFound => match File::create("hello.txt") {
+            Ok(new_file) => new_file,
+            Err(e) => {
+                panic!("Tried to create file but there was a problem: {:?}", e);
             }
         },
         Err(error) => {
             panic!("There was a problem opening the file: {:?}", error)
         }
     };
-    f.write_all("hello".as_bytes()).expect("Couldn't write to file");
+    f.write_all("hello".as_bytes())
+        .expect("Couldn't write to file");
     f.try_clone().expect("Failed to close file");
 
     // `unwrap`は`Result`を返す関数を呼び出したときに、`Result<T,E>`の`T`を取得できる
@@ -56,7 +55,7 @@ fn read_text_from_file() -> Result<String, io::Error> {
 
     match f.read_to_string(&mut s) {
         Ok(_) => Ok(s),
-        Err(e) => Err(e)
+        Err(e) => Err(e),
     }
 }
 
@@ -64,14 +63,14 @@ fn read_text_from_file2(s: &mut String) -> Result<(), io::Error> {
     let mut f = File::open("hello.txt")?;
     match f.read_to_string(s) {
         Ok(_) => Ok(()),
-        Err(e) => Err(e)
+        Err(e) => Err(e),
     }
 }
 
 fn read_text_from_file3() -> Result<String, io::Error> {
     let mut f = File::open("hello.txt")?; // `?`をつけることでエラーがあった場合Err<T>を返してくれる
-    // `?`で返すようにすると、`From Trait`でfrom関数を通すことで、
-    // エラー型が戻り値に指定した`io::Error`に自動的に変換してくれる
+                                          // `?`で返すようにすると、`From Trait`でfrom関数を通すことで、
+                                          // エラー型が戻り値に指定した`io::Error`に自動的に変換してくれる
     let mut s = String::new();
     f.read_to_string(&mut s)?;
     Ok(s)

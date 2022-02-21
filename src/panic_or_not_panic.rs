@@ -1,4 +1,4 @@
-use std::fmt::{Display, self};
+use std::fmt::{self, Display};
 
 use crate::logger;
 
@@ -21,7 +21,7 @@ pub fn panic_or_not_panic() {
         Ok(guess) => {
             let result = guess.value();
             logger::info(&format!("The result is: {}", result));
-        },
+        }
         Err(error) => {
             logger::info(&format!("Error: {}", error));
         }
@@ -32,7 +32,7 @@ pub fn panic_or_not_panic() {
         Ok(guess) => {
             let result = guess.value();
             logger::info(&format!("The result is: {}", result));
-        },
+        }
         Err(error) => {
             logger::info(&format!("Error: {}", error));
         }
@@ -43,7 +43,7 @@ pub fn panic_or_not_panic() {
         Ok(guess) => {
             let result = guess.value();
             logger::info(&format!("The result is: {}", result));
-        },
+        }
         Err(error) => {
             logger::info(&format!("Error: {}", error));
         }
@@ -64,9 +64,7 @@ impl Guess {
             panic!("Guess value must be between 1 and 100, got {}.", value); // panicはコードが回復不可能であることを表す
         }
 
-        Guess {
-            value
-        }
+        Guess { value }
     }
 
     pub fn create(value: u8) -> Result<Guess, OutOfRange> {
@@ -76,9 +74,7 @@ impl Guess {
             return Err(OutOfRange::Lower(value));
         }
 
-        Ok(Guess {
-            value
-        })
+        Ok(Guess { value })
     }
 
     pub fn value(&self) -> u8 {
@@ -97,8 +93,16 @@ impl Display for OutOfRange {
         use self::OutOfRange::*;
 
         match self {
-            Lower(value) => write!(f, "The value must be greater than or equal to 1. actual: {}", value),
-            Higher(value) => write!(f, "The value must be less than or equal to 100. actual: {}", value),
+            Lower(value) => write!(
+                f,
+                "The value must be greater than or equal to 1. actual: {}",
+                value
+            ),
+            Higher(value) => write!(
+                f,
+                "The value must be less than or equal to 100. actual: {}",
+                value
+            ),
         }
     }
 }
