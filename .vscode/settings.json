@@ -1,4 +1,6 @@
 {
   "editor.tabSize": 4,
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "files.eol": "\n", // EOLをLFに統一
+  "editor.formatOnSave": true // 保存時のformat処理を追加
 }
