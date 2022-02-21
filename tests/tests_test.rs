@@ -1,5 +1,5 @@
 extern crate rust_learn;
-use rust_learn::tests::{tests_learn::*, it_work};
+use rust_learn::tests::{it_work, tests_learn::*};
 mod common;
 
 #[test]
@@ -10,8 +10,14 @@ fn it_adds_two() {
 
 #[test]
 fn larger_can_hold_smaller() {
-    let larger = Rectangle { width: 8, height: 7 };
-    let smaller = Rectangle { width: 7, height: 6 };
+    let larger = Rectangle {
+        width: 8,
+        height: 7,
+    };
+    let smaller = Rectangle {
+        width: 7,
+        height: 6,
+    };
 
     let actual = larger.can_hold(&smaller);
 
@@ -20,8 +26,14 @@ fn larger_can_hold_smaller() {
 
 #[test]
 fn smaller_cannot_hold_larger() {
-    let larger = Rectangle { width: 8, height: 7 };
-    let smaller = Rectangle { width: 7, height: 6 };
+    let larger = Rectangle {
+        width: 8,
+        height: 7,
+    };
+    let smaller = Rectangle {
+        width: 7,
+        height: 6,
+    };
 
     let actual = smaller.can_hold(&larger);
 
@@ -49,7 +61,8 @@ fn greeting_contains_name() {
 
     assert!(
         result.contains("Carol"),
-        "Greeting did not contain name, value was `{}`", result
+        "Greeting did not contain name, value was `{}`",
+        result
     );
 }
 
