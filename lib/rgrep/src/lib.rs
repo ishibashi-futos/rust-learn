@@ -1,6 +1,7 @@
 use std::error::Error;
 #[allow(unused_imports)]
 use std::io::prelude::*;
+use std::ops::RangeBounds;
 #[allow(unused_imports)]
 use std::{env, result};
 use std::{fs::File, io::Read};
@@ -45,29 +46,41 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
         search_case_insensitive(&config.query, &contents)
     };
 
-    for (i, line) in results.iter().enumerate() {
-        println!("{}: {}", i+1, line);
+    for line in results {
+        println!("{}: {}", line.row_number, line.line);
     }
 
     Ok(())
 }
 
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+#[derive(PartialEq, Debug)]
+pub struct Found {
+    row_number: usize,
+    line: String,
+}
+
+impl Found {
+    pub fn new(row_number: usize, line: String) -> Found {
+        Found { row_number, line }
+    }
+}
+
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<Found> {
     contents
         .lines()
-        .filter(|line| line.contains(query))
+        .enumerate()
+        .map(|i| Found::new(i.0, i.1.to_string()))
+        .filter(|f| f.line.contains(query))
         .collect()
 }
 
-pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<Found> {
     let query = query.to_lowercase();
-    let mut results: Vec<&'a str> = Vec::new();
 
-    for line in contents.lines() {
-        if line.to_lowercase().contains(&query) {
-            results.push(&line);
-        }
-    }
-
-    results
+    contents
+        .lines()
+        .enumerate()
+        .map(|i| Found::new(i.0, i.1.to_string()))
+        .filter(|f| f.line.to_lowercase().contains(&query))
+        .collect()
 }

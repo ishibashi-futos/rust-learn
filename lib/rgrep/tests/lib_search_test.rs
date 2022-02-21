@@ -1,6 +1,6 @@
 extern crate rgrep;
 
-use rgrep::{search, search_case_insensitive};
+use rgrep::{search, search_case_insensitive, Found};
 
 #[test]
 fn search_one_result() {
@@ -13,7 +13,10 @@ Pick three.";
 
     let actual = search(query, contents);
 
-    assert_eq!(vec!["safe, fast, productive."], actual);
+    assert_eq!(
+        vec![Found::new(1, String::from("safe, fast, productive."))],
+        actual
+    );
 }
 
 #[test]
@@ -29,7 +32,13 @@ Pick three.";
     let actual = search(query, contents).len();
 
     assert_eq!(2, actual);
-    assert_eq!(vec!["Rust:", "Rust is awesome."], search(query, contents));
+    assert_eq!(
+        vec![
+            Found::new(0, String::from("Rust:")),
+            Found::new(2, String::from("Rust is awesome.")),
+        ],
+        search(query, contents)
+    );
 }
 
 #[test]
@@ -58,7 +67,10 @@ Duct tape.";
 
     let actual = search(query, contents);
 
-    assert_eq!(vec!["safe, fast, productive."], actual);
+    assert_eq!(
+        vec![Found::new(1, String::from("safe, fast, productive.")),],
+        actual
+    );
 }
 
 #[test]
@@ -73,5 +85,11 @@ Trust me.";
 
     let actual = search_case_insensitive(query, contents);
 
-    assert_eq!(vec!["Rust:", "Trust me."], actual);
+    assert_eq!(
+        vec![
+            Found::new(0, String::from("Rust:")),
+            Found::new(3, String::from("Trust me.")),
+        ],
+        actual
+    );
 }
