@@ -45,8 +45,8 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
         search_case_insensitive(&config.query, &contents)
     };
 
-    for line in results {
-        println!("{}", line);
+    for (i, line) in results.iter().enumerate() {
+        println!("{}: {}", i+1, line);
     }
 
     Ok(())
