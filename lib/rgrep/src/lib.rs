@@ -1,6 +1,8 @@
 use std::error::Error;
+#[allow(unused_imports)]
 use std::io::prelude::*;
-use std::{result, env};
+#[allow(unused_imports)]
+use std::{env, result};
 use std::{fs::File, io::Read};
 
 pub struct Config {
@@ -11,7 +13,6 @@ pub struct Config {
 
 impl Config {
     pub fn new(mut args: std::slice::Iter<std::string::String>) -> Result<Config, &str> {
-
         // 1つめの文字列はプログラム名なので無視
         args.next();
         let query = match args.next() {
@@ -25,7 +26,11 @@ impl Config {
 
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
 
-        Ok(Config { query, filename, case_sensitive })
+        Ok(Config {
+            query,
+            filename,
+            case_sensitive,
+        })
     }
 }
 
@@ -48,7 +53,10 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    contents.lines().filter(|line| line.contains(query)).collect()
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
