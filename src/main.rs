@@ -24,6 +24,8 @@ mod strings;
 mod use_struct;
 mod using_defined_modules;
 
+extern crate adder;
+
 fn main() {
     logger::info(&format!("Hello, {}!", "world"));
     guess_the_number::guess_the_number();
@@ -50,5 +52,6 @@ fn main() {
     lifetime_syntax::lifetime_syntax();
     closures::closures();
     iterators::iterators();
+    logger::info(&format!("adder: {}", adder::add_three(4))); // Given "adder: 7"
     logger::info("Good bye!");
 }
