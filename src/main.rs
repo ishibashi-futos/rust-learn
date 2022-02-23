@@ -20,6 +20,7 @@ mod match_flow_control;
 mod mutate;
 mod ownership;
 mod panic_or_not_panic;
+mod reference_counting;
 mod references_and_borrowing;
 mod slices;
 mod strings;
@@ -57,5 +58,6 @@ fn main() {
     logger::info(&format!("adder: {}", adder::add_three(4))); // Given "adder: 7"
     boxes::boxes::boxes();
     drops::drops::drops();
+    reference_counting::reference_counting::reference_counting();
     logger::info("Good bye!");
 }
