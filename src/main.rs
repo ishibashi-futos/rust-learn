@@ -3,6 +3,7 @@ mod closures;
 mod data_types;
 mod defining_enum;
 mod defining_modules;
+mod drops;
 mod errors_with_panic;
 mod errors_with_result;
 mod example_collections;
@@ -55,5 +56,6 @@ fn main() {
     iterators::iterators();
     logger::info(&format!("adder: {}", adder::add_three(4))); // Given "adder: 7"
     boxes::boxes::boxes();
+    drops::drops::drops();
     logger::info("Good bye!");
 }
