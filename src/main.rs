@@ -1,3 +1,4 @@
+mod boxes;
 mod closures;
 mod data_types;
 mod defining_enum;
@@ -23,7 +24,6 @@ mod slices;
 mod strings;
 mod use_struct;
 mod using_defined_modules;
-mod boxes;
 
 extern crate adder;
 

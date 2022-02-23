@@ -8,7 +8,10 @@ pub mod boxes {
 
         logger::info(&format!("b: {}", b));
 
-        let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))))));
+        let list = List::Cons(
+            1,
+            Box::new(List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))))),
+        );
 
         logger::info(&format!("list: {:?}", list));
         // Box<T>がスコープを抜けると、ボックスとそのヒープデータが解放される
@@ -31,8 +34,8 @@ pub mod boxes {
 
         assert_eq!(5, x);
         assert_eq!(5, *y); // Derefトレイトが実装されていない場合コンパイルできない
-        // 実際には以下のようなコードとして解釈されている
-        // *(y.deref()) // deref関数は&Tを返し、&Tに対して参照外し`*`を適用する
+                           // 実際には以下のようなコードとして解釈されている
+                           // *(y.deref()) // deref関数は&Tを返し、&Tに対して参照外し`*`を適用する
 
         // Derefトレイトがない場合、コンパイラは`&`参照しか参照外しができない
 
@@ -52,7 +55,7 @@ pub mod boxes {
         Nil,
     }
 
-    pub struct MyBox<T> (T);
+    pub struct MyBox<T>(T);
 
     impl<T> MyBox<T> {
         pub fn new(x: T) -> MyBox<T> {
