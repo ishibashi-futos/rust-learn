@@ -23,6 +23,7 @@ mod slices;
 mod strings;
 mod use_struct;
 mod using_defined_modules;
+mod boxes;
 
 extern crate adder;
 
@@ -53,5 +54,6 @@ fn main() {
     closures::closures();
     iterators::iterators();
     logger::info(&format!("adder: {}", adder::add_three(4))); // Given "adder: 7"
+    boxes::boxes::boxes();
     logger::info("Good bye!");
 }
