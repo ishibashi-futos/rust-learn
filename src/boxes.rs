@@ -9,6 +9,7 @@ pub mod boxes {
         let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))))));
 
         logger::info(&format!("list: {:?}", list));
+        // Box<T>がスコープを抜けると、ボックスとそのヒープデータが解放される
     }
 
     #[derive(Debug)]
