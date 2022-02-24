@@ -13,6 +13,7 @@ mod functions;
 mod generics_example;
 mod guess_the_number;
 mod hash_maps;
+mod interior_mutability;
 mod iterators;
 mod lifetime_syntax;
 mod logger;
@@ -59,5 +60,6 @@ fn main() {
     boxes::boxes::boxes();
     drops::drops::drops();
     reference_counting::reference_counting::reference_counting();
+    interior_mutability::interior_mutability();
     logger::info("Good bye!");
 }
