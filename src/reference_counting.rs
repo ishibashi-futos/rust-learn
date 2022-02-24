@@ -4,7 +4,7 @@ pub mod reference_counting {
     use crate::logger;
 
     pub fn reference_counting() {
-        logger::timer::v1(
+        logger::timer::v2(
             "RC",
             Box::new(|logger| {
                 let a = BoxList::Cons(
@@ -49,6 +49,8 @@ pub mod reference_counting {
                 // logger(&format!("a: {}", Rc::strong_count(&a))); // aは破棄されているためエラーになる
             }),
         );
+
+        logger::timer::v2("Test", Box::new(|logger| logger("Hello")));
     }
 
     pub enum BoxList {
