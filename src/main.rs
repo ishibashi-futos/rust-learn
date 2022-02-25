@@ -27,6 +27,7 @@ mod slices;
 mod strings;
 mod use_struct;
 mod using_defined_modules;
+mod reference_cycles;
 
 extern crate adder;
 
@@ -61,5 +62,6 @@ fn main() {
     drops::drops::drops();
     reference_counting::reference_counting::reference_counting();
     interior_mutability::interior_mutability();
+    reference_cycles::reference_cycles();
     logger::info("Good bye!");
 }
