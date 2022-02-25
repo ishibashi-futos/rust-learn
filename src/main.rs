@@ -18,16 +18,18 @@ mod iterators;
 mod lifetime_syntax;
 mod logger;
 mod match_flow_control;
+mod message_passing;
 mod mutate;
 mod ownership;
 mod panic_or_not_panic;
 mod reference_counting;
+mod reference_cycles;
 mod references_and_borrowing;
 mod slices;
 mod strings;
+mod threads_spawn;
 mod use_struct;
 mod using_defined_modules;
-mod reference_cycles;
 
 extern crate adder;
 
@@ -63,5 +65,7 @@ fn main() {
     reference_counting::reference_counting::reference_counting();
     interior_mutability::interior_mutability();
     reference_cycles::reference_cycles();
+    threads_spawn::threads_spawn();
+    message_passing::message_passing();
     logger::info("Good bye!");
 }
