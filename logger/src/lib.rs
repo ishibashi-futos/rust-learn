@@ -1,4 +1,4 @@
-mod spinners;
+pub mod spinners;
 
 pub mod logger {
     use chrono::Local;
