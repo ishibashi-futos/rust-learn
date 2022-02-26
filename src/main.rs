@@ -20,6 +20,7 @@ mod logger;
 mod match_flow_control;
 mod message_passing;
 mod mutate;
+mod oo_design_patterns;
 mod ownership;
 mod panic_or_not_panic;
 mod reference_counting;
@@ -29,11 +30,10 @@ mod shared_state;
 mod slices;
 mod strings;
 mod threads_spawn;
+mod trait_objects;
 mod use_struct;
 mod using_defined_modules;
 mod what_is_oo;
-mod trait_objects;
-mod oo_design_patterns;
 
 extern crate adder;
 
