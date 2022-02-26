@@ -1,3 +1,4 @@
+mod all_the_places_for_patterns;
 mod boxes;
 mod closures;
 mod data_types;
@@ -26,6 +27,7 @@ mod panic_or_not_panic;
 mod reference_counting;
 mod reference_cycles;
 mod references_and_borrowing;
+mod refutability;
 mod shared_state;
 mod slices;
 mod strings;
@@ -75,5 +77,7 @@ fn main() {
     what_is_oo::what_is_oo();
     trait_objects::trait_objects();
     oo_design_patterns::oo_design_patterns();
+    all_the_places_for_patterns::all_the_places_for_patterns();
+    refutability::refutability();
     logger::info("Good bye!");
 }
