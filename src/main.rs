@@ -25,6 +25,7 @@ mod panic_or_not_panic;
 mod reference_counting;
 mod reference_cycles;
 mod references_and_borrowing;
+mod shared_state;
 mod slices;
 mod strings;
 mod threads_spawn;
@@ -67,5 +68,6 @@ fn main() {
     reference_cycles::reference_cycles();
     threads_spawn::threads_spawn();
     message_passing::message_passing();
+    shared_state::shared_state();
     logger::info("Good bye!");
 }

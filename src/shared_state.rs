@@ -1,5 +1,5 @@
-use std::sync::{Mutex, Arc}; // 代わりにArcを使用する
-// use std::rc::Rc; // Rcはスレッドで値を共有するために安全ではないのでコンパイルエラーになる
+use std::sync::{Arc, Mutex}; // 代わりにArcを使用する
+                             // use std::rc::Rc; // Rcはスレッドで値を共有するために安全ではないのでコンパイルエラーになる
 use std::thread;
 
 use crate::logger;
