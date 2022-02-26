@@ -41,13 +41,13 @@ impl AveragedCollection {
         self.average
     }
 
-    pub fn pop(&mut self) -> Option<i32>{
+    pub fn pop(&mut self) -> Option<i32> {
         let poped = self.list.pop();
         match poped {
             Some(value) => {
                 self.update_average();
                 Some(value)
-            },
+            }
             None => None,
         }
     }

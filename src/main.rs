@@ -31,6 +31,8 @@ mod strings;
 mod threads_spawn;
 mod use_struct;
 mod using_defined_modules;
+mod what_is_oo;
+mod trait_objects;
 
 extern crate adder;
 
@@ -69,5 +71,7 @@ fn main() {
     threads_spawn::threads_spawn();
     message_passing::message_passing();
     shared_state::shared_state();
+    what_is_oo::what_is_oo();
+    trait_objects::trait_objects();
     logger::info("Good bye!");
 }
