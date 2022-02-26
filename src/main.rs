@@ -33,6 +33,7 @@ mod use_struct;
 mod using_defined_modules;
 mod what_is_oo;
 mod trait_objects;
+mod oo_design_patterns;
 
 extern crate adder;
 
@@ -73,5 +74,6 @@ fn main() {
     shared_state::shared_state();
     what_is_oo::what_is_oo();
     trait_objects::trait_objects();
+    oo_design_patterns::oo_design_patterns();
     logger::info("Good bye!");
 }
