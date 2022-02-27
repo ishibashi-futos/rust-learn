@@ -9,6 +9,8 @@ edition = "2021"
 members = [
     "adder",
     "logger",
+    "hello_macro",
+    "hello_macro_derive",
 ]
 
 [dependencies]
@@ -16,6 +18,8 @@ rand = "0.4.0"
 chrono = "0.4"
 adder = { path = "./adder" }
 logger = { path = "./logger" }
+hello_macro = { path = "./hello_macro" }
+hello_macro_derive = { path = "./hello_macro_derive" }
 
 [profile.dev]
 opt-level = 1
