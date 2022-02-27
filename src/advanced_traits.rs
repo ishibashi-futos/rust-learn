@@ -13,7 +13,10 @@ impl Add for Point {
     type Output = Point;
 
     fn add(self, other: Point) -> Point {
-        Point { x: self.x + other.x, y: self.y + other.y }
+        Point {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
     }
 }
 // Addトレイトは以下のようになっている
@@ -115,43 +118,45 @@ impl Animal for Dog {
 struct Wrapper(Vec<String>);
 impl std::fmt::Display for Wrapper {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "[{}]",  self.0.join(", "))
+        write!(f, "[{}]", self.0.join(", "))
     }
 }
 
 pub fn advanced_traits() {
-    spinner::v1("advanced trait", Box::new(|| {
+    spinner::v1(
+        "advanced trait",
+        Box::new(|| {
+            let a = Point { x: 1, y: 0 };
+            let b = Point { x: 2, y: 3 };
 
-        let a = Point { x: 1, y: 0 };
-        let b = Point { x: 2, y: 3 };
+            let c = a + b;
 
-        let c = a + b;
+            assert_eq!(c, Point { x: 3, y: 3 });
 
-        assert_eq!(c, Point { x: 3, y: 3 });
+            let mills = Millimeters(1000);
+            let meters = Meters(1);
 
-        let mills = Millimeters(1000);
-        let meters = Meters(1);
+            let c = mills + meters;
 
-        let c = mills + meters;
+            assert_eq!(c, Millimeters(2000));
 
-        assert_eq!(c, Millimeters(2000));
+            let person = Human {};
+            // どの実装を呼び出すか明示的に指定する
+            assert_eq!("This is your captain speaking.", Pilot::fly(&person));
+            assert_eq!("Up", Wizard::fly(&person));
+            assert_eq!("*waving arms furiously*", Human::fly(&person));
 
-        let person = Human {};
-        // どの実装を呼び出すか明示的に指定する
-        assert_eq!("This is your captain speaking.", Pilot::fly(&person));
-        assert_eq!("Up", Wizard::fly(&person));
-        assert_eq!("*waving arms furiously*", Human::fly(&person));
+            // <Type as Trait>::function(reciever_if_method, next_arg, ...)
+            assert_eq!(String::from("puppy"), <Dog as Animal>::baby_name());
+            assert_eq!(String::from("Spot"), Dog::baby_name());
 
-        // <Type as Trait>::function(reciever_if_method, next_arg, ...)
-        assert_eq!(String::from("puppy"), <Dog as Animal>::baby_name());
-        assert_eq!(String::from("Spot"), Dog::baby_name());
-
-        let w = Wrapper(vec![String::from("hello"), String::from("world")]);
-        // Vecの基本動作が使える
-        for _ in w.0.iter() {
-            // 何かの操作
-        }
-        // Displayトレイトが実装されているのでformatで出力できる
-        assert_eq!("[hello, world]", format!("{}", w));
-    }));
+            let w = Wrapper(vec![String::from("hello"), String::from("world")]);
+            // Vecの基本動作が使える
+            for _ in w.0.iter() {
+                // 何かの操作
+            }
+            // Displayトレイトが実装されているのでformatで出力できる
+            assert_eq!("[hello, world]", format!("{}", w));
+        }),
+    );
 }

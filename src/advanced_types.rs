@@ -19,12 +19,9 @@ fn make_do_twice() -> Box<dyn Fn(fn(i32) -> i32, i32) -> i32> {
 }
 
 #[derive(HelloMacro)]
-struct Test {
-
-}
+struct Test {}
 
 pub fn advanced_types() {
-
     let x: i32 = 5;
     let y: Kilimeters = 5;
 
@@ -41,7 +38,10 @@ pub fn advanced_types() {
 
     let list_of_numbers = vec![1, 2, 3];
 
-    let list_of_strings = list_of_numbers.iter().map(ToString::to_string).collect::<Vec<String>>();
+    let list_of_strings = list_of_numbers
+        .iter()
+        .map(ToString::to_string)
+        .collect::<Vec<String>>();
 
     for v in list_of_strings {
         logger::logger::info(&format!("{}", v));

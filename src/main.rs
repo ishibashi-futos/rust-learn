@@ -1,3 +1,5 @@
+mod advanced_traits;
+mod advanced_types;
 mod all_the_places_for_patterns;
 mod boxes;
 mod closures;
@@ -37,8 +39,6 @@ mod unsafe_rust;
 mod use_struct;
 mod using_defined_modules;
 mod what_is_oo;
-mod advanced_traits;
-mod advanced_types;
 
 extern crate adder;
 
