@@ -37,6 +37,7 @@ mod unsafe_rust;
 mod use_struct;
 mod using_defined_modules;
 mod what_is_oo;
+mod advanced_traits;
 
 extern crate adder;
 
@@ -81,5 +82,6 @@ fn main() {
     all_the_places_for_patterns::all_the_places_for_patterns();
     refutability::refutability();
     unsafe_rust::unsafe_rust();
+    advanced_traits::advanced_traits();
     logger::info("Good bye!");
 }
