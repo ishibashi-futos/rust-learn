@@ -33,6 +33,7 @@ mod slices;
 mod strings;
 mod threads_spawn;
 mod trait_objects;
+mod unsafe_rust;
 mod use_struct;
 mod using_defined_modules;
 mod what_is_oo;
@@ -79,5 +80,6 @@ fn main() {
     oo_design_patterns::oo_design_patterns();
     all_the_places_for_patterns::all_the_places_for_patterns();
     refutability::refutability();
+    unsafe_rust::unsafe_rust();
     logger::info("Good bye!");
 }
