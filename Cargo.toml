@@ -15,6 +15,7 @@ members = [
 rand = "0.4.0"
 chrono = "0.4"
 adder = { path = "./adder" }
+logger = { path = "./logger" }
 
 [profile.dev]
 opt-level = 1
