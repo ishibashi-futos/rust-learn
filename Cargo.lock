@@ -143,6 +143,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "server"
+version = "0.1.0"
+dependencies = [
+ "logger",
+]
+
+[[package]]
 name = "syn"
 version = "1.0.86"
 source = "registry+https://github.com/rust-lang/crates.io-index"

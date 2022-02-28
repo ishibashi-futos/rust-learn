@@ -11,6 +11,7 @@ members = [
     "logger",
     "hello_macro",
     "hello_macro_derive",
+    "server"
 ]
 
 [dependencies]
