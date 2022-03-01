@@ -1,15 +1,33 @@
-use std::io;
-fn main() {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    let nums = input
-        .trim()
-        .split(" ")
-        .map(|x| x.parse::<i32>().unwrap())
-        .collect::<Vec<i32>>();
+use std::collections::BTreeMap;
+use proconio::input;
 
-    let second = nums.first().unwrap();
-    let third = nums.get(*second as usize).unwrap();
-    let fourth = nums.get(*third as usize).unwrap();
-    println!("{}", fourth);
+fn main() {
+    input! {
+        n: usize,
+        m: usize,
+        mut a: [usize; n],
+        b: [usize; m],
+    }
+
+    if m > n {
+        println!("No");
+        return;
+    }
+
+    let mut m = BTreeMap::new();
+    for i in a.iter() {
+        let e = m.entry(*i).or_insert(0);
+        *e += 1;
+    }
+    for l3 in b.iter() {
+        let e = m.entry(*l3).or_insert(0);
+        if *e > 0 {
+            *e -= 1;
+        } else {
+            println!("No");
+            return;
+        }
+    }
+    println!("Yes");
+    return;
 }
