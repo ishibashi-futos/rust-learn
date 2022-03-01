@@ -4,7 +4,7 @@ use std::sync::{Arc, Mutex};
 pub struct ThreadPool {
     #[allow(dead_code)]
     workers: Vec<Worker>,
-    sender: std::sync::mpsc::Sender<Job>,
+    sender: std::sync::mpsc::Sender<Message>,
 }
 
 type Job = Box<dyn FnBox + Send + 'static>;
@@ -34,7 +34,23 @@ impl ThreadPool {
         F: FnOnce() + Send + 'static,
     {
         let job = Box::new(f);
-        self.sender.send(job).unwrap();
+        self.sender.send(Message::NewJob(job)).unwrap();
+    }
+}
+
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        info("Sending terminate message to all workers.");
+        for _ in &mut self.workers {
+            self.sender.send(Message::Terminate).unwrap();
+        }
+
+        for worker in &mut self.workers {
+            logger::logger::info(&format!("Shutting down worker {}", worker.id));
+            if let Some(thread) = worker.thread.take() {
+                thread.join().unwrap();
+            }
+        }
     }
 }
 
@@ -42,19 +58,29 @@ struct Worker {
     #[allow(dead_code)]
     id: usize,
     #[allow(dead_code)]
-    thread: std::thread::JoinHandle<()>,
+    thread: Option<std::thread::JoinHandle<()>>,
 }
 
 impl Worker {
-    fn new(id: usize, reciever: Arc<Mutex<std::sync::mpsc::Receiver<Job>>>) -> Worker {
+    fn new(id: usize, reciever: Arc<Mutex<std::sync::mpsc::Receiver<Message>>>) -> Worker {
         let thread = std::thread::spawn(move || loop {
-            let job = reciever.lock().unwrap().recv().unwrap();
+            let message = reciever.lock().unwrap().recv().unwrap();
+            match message {
+                Message::NewJob(job) => {
+                    job.call_box();
+                }
+                Message::Terminate => {
+                    info(&format!("Worker {} was told to terminate", id));
+                    break;
+                }
+            }
             info(&format!("Worker {} got a job; executing", id));
-
-            job.call_box();
         });
 
-        Worker { id, thread }
+        Worker {
+            id,
+            thread: Some(thread),
+        }
     }
 }
 
@@ -66,4 +92,9 @@ impl<F: FnOnce()> FnBox for F {
     fn call_box(self: Box<Self>) {
         (*self)()
     }
+}
+
+enum Message {
+    NewJob(Job),
+    Terminate,
 }
