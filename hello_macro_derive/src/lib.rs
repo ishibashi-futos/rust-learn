@@ -24,4 +24,3 @@ fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
 
     gen.into()
 }
-
