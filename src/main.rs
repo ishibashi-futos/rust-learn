@@ -5,7 +5,7 @@ fn main() {
     input! {
         n: usize,
         m: usize,
-        mut a: [usize; n],
+        a: [usize; n],
         b: [usize; m],
     }
 
