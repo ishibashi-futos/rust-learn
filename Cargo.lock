@@ -104,6 +104,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "client_examples"
+version = "0.1.0"
+dependencies = [
+ "mini-redis",
+ "tokio",
+]
+
+[[package]]
 name = "futures-core"
 version = "0.3.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
