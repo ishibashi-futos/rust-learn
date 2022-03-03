@@ -1,22 +1,45 @@
-use mini_redis::{client, Result};
+use mini_redis::{Connection, Frame};
+use tokio::net::TcpListener;
+use tokio::net::TcpStream;
 
 #[tokio::main]
-pub async fn main() -> Result<()> {
-    // [§03-async/awaitを使う]この時点ではsay_worldの実行は行われない
-    let op = say_world();
-    let mut client = client::connect("127.0.0.1:6379").await?;
+pub async fn main() {
 
-    client.set("foo", "bar".into()).await?;
+    let listener = TcpListener::bind("127.0.0.1:6379").await.unwrap();
 
-    let result = client.get("hello").await?;
-
-    println!("got value from the server; result={:?}", result);
-    // [§03-async/awaitを使う]このタイミングでようやくsay_worldの実行が行われる
-    op.await;
-
-    Ok(())
+    loop {
+        let (socket, _) = listener.accept().await.unwrap();
+        tokio::spawn(async move {
+            process(socket).await;
+        });
+    }
 }
 
-async fn say_world() {
-    println!("Hello, world!");
+async fn process(socket: TcpStream) {
+    // selfでmini_redis::Connectionを参照することができる
+    use mini_redis::Command::{self, Get, Set};
+    use std::collections::HashMap;
+
+    let mut db = HashMap::new();
+
+    let mut connection = Connection::new(socket);
+
+    if let Some(frame) = connection.read_frame().await.unwrap() {
+        println!("Got: {:?}", frame);
+        let response = match Command::from_frame(frame).unwrap() {
+            Set(cmd) => {
+                db.insert(cmd.key().to_string(), cmd.value().to_vec());
+                Frame::Simple("OK".into())
+            },
+            Get(cmd) => {
+                if let Some(value) = db.get(cmd.key()) {
+                    Frame::Bulk(value.clone().into())
+                } else {
+                    Frame::Null
+                }
+            },
+            cmd => panic!("unimplemented command: {:?}", cmd)
+        };
+        connection.write_frame(&response).await.unwrap();
+    }
 }
